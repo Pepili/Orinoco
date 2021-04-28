@@ -1,0 +1,113 @@
+/*articles*/
+
+.product{
+    h3{
+        margin:125px 0 20px 50px;
+        font-weight:110;
+        font-size:20px;
+        &:after{
+            content: "";
+            display:block;
+            width:63px;
+            height:8px;
+            border-bottom:2px solid $color-couture;
+        }
+    }
+}
+
+#listTeddies{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 30px;    
+    width:90%;
+    margin: 0 auto 50px auto;
+    padding-top: 10px !important;
+    a{         
+        color:black;
+        @include aAnimation;       
+        &:hover{
+            transform:scale(0.98);
+            &:after{
+                opacity:1;
+            }
+        }
+        &::after{
+            @include afterScale;               
+            box-shadow: -1px -1px 25px -1px rgba(154, 106, 106, 0.75);
+        }
+
+    }       
+    .teddiesArticles{
+        background-color:$color-tertiary;
+        padding:8px;
+        border-radius:10px;       
+        .couture{
+            display: flex;        
+            border: 2px $color-couture dashed;
+                img{                        
+                    width:40%;
+                    object-fit: cover;
+                    border-right: 2px $color-tertiary dashed;
+                }
+                .teddiesDescription{                                                                          
+                    width:60%;
+                    line-height:30px;
+                    margin:10px 0 10px 20px;                       
+                    .textDescription{
+                        display:flex;                            
+                    }
+                    h2{
+                        margin:0;
+                        font-size: 16px;
+                        margin-right:4px;
+                    }    
+                    p{
+                        font-size:14px;
+                        width:95%;
+                        margin:auto;    
+                        line-height:22px;
+                        margin-left:0; 
+                        margin-top:5px;    
+                    }
+                    .pDescription{
+                        margin-top:0;                            
+                    }
+                }
+            }
+        } 
+     
+}
+
+@media all and(max-width:800px){
+    #listTeddies{
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        a{
+            width:90%;
+            margin:auto;
+        }
+    }
+    .product{
+        h3{
+            margin-left:40px;
+        }
+    }
+    .couture{
+        flex-direction: column;
+        width:100%;
+        margin:auto;
+        img{
+            width:100% !important;
+            height:40%;
+        }
+        .teddiesDescription{
+            h2{
+                font-size:18px !important;
+            }
+            p{
+                font-size:16px !important;
+            }
+        }
+    }
+}
