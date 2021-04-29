@@ -15,16 +15,17 @@ function response(teddies){//je créé une reponse qui s'ajoutera à divTeddies
     const divTeddies= document.getElementById("listTeddies");    
     teddies.forEach(teddy => { 
         const teddyElement=document.createElement("a");
-        teddyElement.href="product.html";
+        teddyElement.href="product.html?_id=" + teddy._id;
+        console.log(teddy._id);
         teddyElement.classList.add("teddiesArticles");
-        teddyElement.innerHTML =` 
+        teddyElement.innerHTML =/*html*/` 
             <div class="couture">         
-            <img src="${teddy.imageUrl}" alt="teddy">   
-            <div class="teddiesDescription">                
-            <div class="textDescription"><h2>Name:</h2> <p>${teddy.name}</p></div>
-            <div class="textDescription"><h2>Price:</h2> <p>${parseFloat(teddy.price / 100).toFixed(2)} €</p></div>
-            <h2>Description:</h2><p class="pDescription">${teddy.description}</p>
-            </div> 
+                <img src="${teddy.imageUrl}" alt="teddy">   
+                <div class="teddiesDescription">                
+                    <div class="textDescription"><h2>Name:</h2> <p>${teddy.name}</p></div>
+                    <div class="textDescription"><h2>Price:</h2> <p>${parseFloat(teddy.price / 100).toFixed(2)} €</p></div>
+                    <h2>Description:</h2><p class="pDescription">${teddy.description}</p>
+                </div> 
             </div>                                 
         ` 
         divTeddies.appendChild(teddyElement); 

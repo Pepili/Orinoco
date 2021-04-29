@@ -1,12 +1,12 @@
 /*fonts logo*/
 @font-face {
   font-family: "fingerpaint";
-  src: url("../fonts/FingerPaint-Regular.ttf") format("truetype");
+  src: url("fonts/FingerPaint-Regular.ttf") format("truetype");
 }
 /*fonts texte*/
 @font-face {
   font-family: "opensans";
-  src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
+  src: url("fonts/OpenSans-Regular.ttf") format("truetype");
 }
 /*page*/
 body {
