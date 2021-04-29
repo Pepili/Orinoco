@@ -1,7 +1,6 @@
 window.onload=function(){//j'execute request au chargement de la page  
     
-    request("http://localhost:3000/api/teddies", response);
-
+    request("http://localhost:3000/api/teddies", response);    
 } 
 
 
