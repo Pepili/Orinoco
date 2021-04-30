@@ -1,0 +1,119 @@
+/*product*/
+
+.headerProduct{
+    margin-bottom:30px;
+}
+
+.teddyProduct{
+    width:95%;
+    margin:auto;
+    border-top: 1px darken($color-primary, 60%) solid;
+    border-bottom: 1px darken($color-primary, 60%) solid;
+    .couture{
+        display:flex;        
+        height:500px;
+        margin: 20px 0;
+        background-color:$color-tertiary;
+        border-radius: 20px;
+        img{
+            width:40%;
+            object-fit:cover;
+            border-right: 2px $color-couture dashed;
+            border-radius: 20px 0 0 20px;
+        }
+        .teddyDescription{
+            padding:20px;
+            line-height:28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;            
+            h2{
+                margin:0;
+                font-size: 16px;
+                margin-right:4px;
+            }
+            p{
+                margin:0;
+                margin-bottom:20px;
+            }
+            .teddyDescriptionChild{
+                width:90%;
+            }
+            .textTeddyDescription{
+                display:flex;             
+            }
+            nav{
+                width:40%;
+                border:1px darken($color-primary, 60%) solid;
+                background-color:$color-secondary;
+            }
+            #buttonColor{
+                display: flex; 
+                justify-content: space-between;               
+                width:100%;                
+                height:35px;
+                font-size:16px;
+                color:lighten(black, 40%);                
+                border:none;                
+                background-color:$color-secondary;
+                line-height:35px;
+                span{
+                    line-height:35px;
+                } 
+                #up{
+                    display: none;
+                }               
+            }
+            #navColors{
+                display:none;                
+                &.showColor{
+                    display:flex;
+                    flex-direction:column;
+                    position:relative;                    
+                    margin:0;
+                    width:100%;                  
+                    li{
+                        text-align: center;
+                        font-size:16px;
+                        border-top:1px lighten(black, 80%) solid;
+                        width:100%;
+                        margin:auto;
+                        padding:6px;
+                        cursor: pointer;
+                        z-index:1;
+                        transition:background-color 0.5s ease-in-out;
+                        &:hover{
+                            background-color: darken($color-secondary, 20%);
+                        }                                     
+                    }                 
+                }
+            }
+        }
+        .addCard{
+            background-color:darken($color-tertiary, 20%);
+            border:0;
+            width:40%;
+            height:45px;
+            float:right;    
+            border-radius:12px;
+            font-size:16px;          
+            margin-right:16px;        
+            @include aAnimation;
+            &:hover{
+                transform:scale(0.9);
+                &:after{
+                    opacity:1;
+                }
+            }
+            &::after{
+                @include afterScale;        
+                border-radius: 40px;                      
+                box-shadow: -1px -1px 25px 2px rgba(154, 106, 106, 0.75);
+            }
+        }
+    }
+}
+
+.footerProduct{
+    margin-top:30px;
+}
