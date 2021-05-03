@@ -9,19 +9,19 @@
     margin:auto;
     border-top: 1px darken($color-primary, 60%) solid;
     border-bottom: 1px darken($color-primary, 60%) solid;
-    .couture{
+    .coutureProduct{
         display:flex;        
         height:500px;
         margin: 20px 0;
         background-color:$color-tertiary;
         border-radius: 20px;
-        img{
+        .imageTeddy{
             width:40%;
             object-fit:cover;
             border-right: 2px $color-couture dashed;
             border-radius: 20px 0 0 20px;
         }
-        .teddyDescription{
+        .teddyDescriptionProduct{
             padding:20px;
             line-height:28px;
             display: flex;
@@ -43,7 +43,7 @@
                 display:flex;             
             }
             nav{
-                width:40%;
+                width:60%;
                 border:1px darken($color-primary, 60%) solid;
                 background-color:$color-secondary;
             }
@@ -51,14 +51,15 @@
                 display: flex; 
                 justify-content: space-between;               
                 width:100%;                
-                height:35px;
+                height:100%;
                 font-size:16px;
                 color:lighten(black, 40%);                
                 border:none;                
                 background-color:$color-secondary;
                 line-height:35px;
+                cursor: pointer;
                 span{
-                    line-height:35px;
+                    line-height:35px;                    
                 } 
                 #up{
                     display: none;
@@ -88,7 +89,7 @@
                     }                 
                 }
             }
-        }
+        }       
         .addCard{
             background-color:darken($color-tertiary, 20%);
             border:0;
@@ -97,7 +98,8 @@
             float:right;    
             border-radius:12px;
             font-size:16px;          
-            margin-right:16px;        
+            margin-right:16px; 
+            cursor:pointer;       
             @include aAnimation;
             &:hover{
                 transform:scale(0.9);
@@ -116,4 +118,51 @@
 
 .footerProduct{
     margin-top:30px;
+}
+
+@media all and (max-width:800px){    
+    .coutureProduct{
+        flex-direction: column;
+        height:800px !important;
+        .imageTeddy{
+            width:100% !important;
+            height:40% !important;
+            border-radius: 20px 20px 0 0 !important;
+            border-right: none !important;
+            border-bottom: 2px $color-couture dashed;
+        }
+        .teddyDescriptionChild{
+            width:100% !important;
+        }
+        .teddyDescriptionProduct{
+            width: 100%;
+            height:60%;
+            justify-content: unset !important;
+        }
+        nav{
+            width: 95% !important;
+            margin: auto;
+            margin-top:30px;
+            .showColor{
+                position:absolute !important;
+                width:85% !important;
+                margin:auto;
+                z-index:2;
+                background-color:$color-secondary;
+                border:1px darken($color-primary, 60%) solid;
+                border-top:none;
+            }
+        }
+        .buttonCard{
+            width:100%;
+            display:flex;   
+            justify-content: center;         
+        }
+        .addCard{
+            width:95% !important;
+            margin-right:0 !important;            
+            margin-top:50px;            
+            float:inherit !important;
+        }
+    }
 }

@@ -15,9 +15,9 @@ function request(url, cb){//j'execute request pour accéder à l'API des Teddies
 function response(teddy){
     const divTeddies=document.getElementById("coutureParent");
     divTeddies.innerHTML=` 
-    <div class="couture">         
-        <img src="${teddy.imageUrl}" alt="teddy">   
-        <div class="teddyDescription">
+    <div class="coutureProduct">         
+        <img class="imageTeddy"src="${teddy.imageUrl}" alt="teddy">   
+        <div class="teddyDescriptionProduct">
             <div class="teddyDescriptionChild">               
                 <div class="textTeddyDescription"><h2>Name:</h2> <p>${teddy.name}</p></div>
                 <div class="textTeddyDescription"><h2>Price:</h2> <p>${parseFloat(teddy.price / 100).toFixed(2)} €</p></div>
