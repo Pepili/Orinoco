@@ -14,7 +14,7 @@ function request(url, cb){//j'execute request pour accéder à l'API des Teddies
 
 function response(teddy){
     const divTeddies=document.getElementById("coutureParent");
-    divTeddies.innerHTML=` 
+    divTeddies.innerHTML=/*html*/` 
     <div class="coutureProduct">         
         <img class="imageTeddy"src="${teddy.imageUrl}" alt="teddy">   
         <div class="teddyDescriptionProduct">
@@ -30,8 +30,22 @@ function response(teddy){
                     <ul id="navColors"></ul>
                 </nav> 
             </div> 
-            <div class="buttonCard">         
-                <button class="addCard"> ajouter au panier </button> 
+
+            <label for="q">Quantité: </label>
+            <select id="qt" name="q">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+
+            <div class="buttonCart">         
+                <button class="addCart" id="addCart" type="submit" name="addCart"> ajouter au panier </button> 
             </div> 
         </div>        
     </div>    
@@ -40,7 +54,7 @@ function response(teddy){
     const navColors=document.getElementById("navColors"); 
     const buttonColor=document.getElementById("buttonColor");    
     const down=document.getElementById("down");  
-    let x= new Boolean(true);
+    let x= Boolean(down);
 
     colors.forEach(colorFunction);    
     function colorFunction(item){
@@ -56,7 +70,78 @@ function response(teddy){
         down.className="fas fa-chevron-down";
     }   
     })
-      
+
+    /* ajout des produits dans le panier */
+
+    //selection de l'id du formulaire
+    const qt=document.getElementById("qt");
+
+    
+
+    //Selection du bouton ajouter l'article au panier
+    const addCart=document.getElementById("addCart");
+
+    //Ecouter le bouton et envoyer au panier
+    addCart.addEventListener("click", (event)=>{
+        event.preventDefault();
+
+        //mettre le choix de l'utilisateur dans une variable
+        const choiceQt=qt.value;
+    
+        //récupération des valeurs du formulaire
+        let valueProduct={
+            name:teddy.name,
+            id:teddy._id,
+            price:parseFloat(teddy.price / 100).toFixed(2),
+            description:teddy.description,
+            quantity:choiceQt
+        };
+        
+
+        /*stocker la récupération des valeurs du formulaire dans le local storage*/
+
+        //déclaration de la variable dans laquelle on met les key et values qui sont dans le local
+        let productAddLocalStorage=JSON.parse(localStorage.getItem("product"));
+
+        //fonction fenêtre pop up
+        const popup = () =>{
+            if(window.confirm(`${teddy.name} a bien été ajouté au panier
+            Consultez le panier OK ou revenir à l'accueil ANNULER`)){
+                window.location.href="Cart.html";
+            }
+            else{
+                window.location.href="index.html";
+            }
+        }
+
+        //fonction addProductStorage
+        const addProductStorage = () =>{
+            //ajout dans l'array de l'objet avec les values choisi par l'utilisateur
+            productAddLocalStorage.push(valueProduct);
+
+            //transformation en format JSON et l'envoyer dans la key product du localStorage
+            localStorage.setItem("product", JSON.stringify(productAddLocalStorage));   
+        };
+
+        //s'il y a deja des produits dans le local storage
+        if(productAddLocalStorage){            
+            addProductStorage();
+            popup();         
+        }
+
+        //s'il n'y a pas de produit
+        else{
+            productAddLocalStorage=[];
+            addProductStorage();
+            popup();                
+        }
+        
+
+    });   
+    
+   
+
+
 };
 
 
@@ -67,3 +152,4 @@ const mainMenu= document.getElementById('mainMenu');
 barMenu.addEventListener('click', () => {
     mainMenu.classList.toggle('show');
 });
+

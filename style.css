@@ -535,7 +535,7 @@ footer .contact ul li a:hover:after {
 .teddyProduct .coutureProduct .teddyDescriptionProduct #navColors.showColor li:hover {
   background-color: #e4d297;
 }
-.teddyProduct .coutureProduct .addCard {
+.teddyProduct .coutureProduct .addCart {
   background-color: #d3896f;
   border: 0;
   width: 40%;
@@ -551,13 +551,13 @@ footer .contact ul li a:hover:after {
   transform: scale(1);
   transition: transform 500ms ease-in-out;
 }
-.teddyProduct .coutureProduct .addCard:hover {
+.teddyProduct .coutureProduct .addCart:hover {
   transform: scale(0.9);
 }
-.teddyProduct .coutureProduct .addCard:hover:after {
+.teddyProduct .coutureProduct .addCart:hover:after {
   opacity: 1;
 }
-.teddyProduct .coutureProduct .addCard::after {
+.teddyProduct .coutureProduct .addCart::after {
   content: "";
   position: absolute;
   top: 0;
@@ -609,12 +609,12 @@ footer .contact ul li a:hover:after {
     border: 1px #31463f solid;
     border-top: none;
   }
-  .coutureProduct .buttonCard {
+  .coutureProduct .buttonCart {
     width: 100%;
     display: flex;
     justify-content: center;
   }
-  .coutureProduct .addCard {
+  .coutureProduct .addCart {
     width: 95% !important;
     margin-right: 0 !important;
     margin-top: 50px;
