@@ -26,7 +26,21 @@
             line-height:28px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;            
+            justify-content: space-between;
+            .infoProductTeddy{                
+                .colorChoice{
+                    float:right;
+                    font-size:16px;
+                    line-height:35px;
+                    select{
+                        font-size:16px;
+                        height:30px;
+                        width:50px; 
+                        background-color:$color-secondary;
+                        cursor:pointer;                                               
+                    }
+                }
+            }            
             h2{
                 margin:0;
                 font-size: 16px;
@@ -42,10 +56,14 @@
             .textTeddyDescription{
                 display:flex;             
             }
-            nav{
-                width:60%;
-                border:1px darken($color-primary, 60%) solid;
+            nav{              
+                position:absolute;
+                width:25%;
+                margin:auto;
+                z-index:2;
                 background-color:$color-secondary;
+                border:1px darken($color-primary, 60%) solid;
+                border-top:none;
             }
             #buttonColor{
                 display: flex; 
@@ -99,6 +117,7 @@
             border-radius:12px;
             font-size:16px;          
             margin-right:16px; 
+            box-shadow: -1px -1px 25px 2px rgba(154, 106, 106, 0.75);
             cursor:pointer;       
             @include aAnimation;
             &:hover{
@@ -109,7 +128,7 @@
             }
             &::after{
                 @include afterScale;        
-                border-radius: 40px;                      
+                border-radius: 12px;                      
                 box-shadow: -1px -1px 25px 2px rgba(154, 106, 106, 0.75);
             }
         }
@@ -138,21 +157,10 @@
             width: 100%;
             height:60%;
             justify-content: unset !important;
-        }
+        }  
         nav{
-            width: 95% !important;
-            margin: auto;
-            margin-top:30px;
-            .showColor{
-                position:absolute !important;
-                width:85% !important;
-                margin:auto;
-                z-index:2;
-                background-color:$color-secondary;
-                border:1px darken($color-primary, 60%) solid;
-                border-top:none;
-            }
-        }
+            width:40% !important;
+        }     
         .buttonCart{
             width:100%;
             display:flex;   

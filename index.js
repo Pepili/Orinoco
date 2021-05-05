@@ -18,7 +18,7 @@ function response(teddies){//je créé une reponse qui s'ajoutera à divTeddies
         teddyElement.classList.add("teddiesArticles");
         teddyElement.innerHTML =/*html*/` 
             <div class="couture">         
-                <img src="${teddy.imageUrl}" alt="teddy">   
+                <img src="${teddy.imageUrl}" alt="teddy"/>   
                 <div class="teddiesDescription">                
                     <div class="textDescription"><h4>Name:</h4> <p>${teddy.name}</p></div>
                     <div class="textDescription"><h4>Price:</h4> <p>${parseFloat(teddy.price / 100).toFixed(2)} €</p></div>

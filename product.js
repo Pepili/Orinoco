@@ -16,36 +16,40 @@ function response(teddy){
     const divTeddies=document.getElementById("coutureParent");
     divTeddies.innerHTML=/*html*/` 
     <div class="coutureProduct">         
-        <img class="imageTeddy"src="${teddy.imageUrl}" alt="teddy">   
-        <div class="teddyDescriptionProduct">
-            <div class="teddyDescriptionChild">               
-                <div class="textTeddyDescription"><h2>Name:</h2> <p>${teddy.name}</p></div>
-                <div class="textTeddyDescription"><h2>Price:</h2> <p>${parseFloat(teddy.price / 100).toFixed(2)} €</p></div>
-                <h2>Description:</h2><p class="pDescription">${teddy.description}</p> 
-                <nav>
-                    <button id="buttonColor">
-                        Sélectionner une couleur 
-                        <span id="down" class="fas fa-chevron-down"></span>                                
-                    </button>
-                    <ul id="navColors"></ul>
-                </nav> 
-            </div> 
-
-            <label for="q">Quantité: </label>
-            <select id="qt" name="q">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-            </select>
+        <img class="imageTeddy"src="${teddy.imageUrl}" alt="teddy"/>   
+        <div class="teddyDescriptionProduct">            
+                <div class="teddyDescriptionChild">               
+                    <div class="textTeddyDescription"><h2>Name:</h2> <p>${teddy.name}</p></div>
+                    <div class="textTeddyDescription"><h2>Price:</h2> <p>${parseFloat(teddy.price / 100).toFixed(2)} €</p></div>
+                    <h2>Description:</h2><p class="pDescription">${teddy.description}</p> 
+                    <div class="infoProductTeddy">
+                        <nav>
+                            <button id="buttonColor">
+                                Select a color 
+                                <span id="down" class="fas fa-chevron-down"></span>                                
+                            </button>
+                            <ul id="navColors"></ul>
+                        </nav> 
+                        <div class="colorChoice">
+                        <label for="q">Quantity: </label>
+                        <select id="qt" name="q">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </div>
+            
+                    </div>
+                </div>                
 
             <div class="buttonCart">         
-                <button class="addCart" id="addCart" type="submit" name="addCart"> ajouter au panier </button> 
+                <button class="addCart" id="addCart" type="submit" name="addCart"> Add to cart </button> 
             </div> 
         </div>        
     </div>    
@@ -90,6 +94,7 @@ function response(teddy){
     
         //récupération des valeurs du formulaire
         let valueProduct={
+            image:teddy.imageUrl,
             name:teddy.name,
             id:teddy._id,
             price:parseFloat(teddy.price / 100).toFixed(2),
@@ -105,9 +110,9 @@ function response(teddy){
 
         //fonction fenêtre pop up
         const popup = () =>{
-            if(window.confirm(`${teddy.name} a bien été ajouté au panier
-            Consultez le panier OK ou revenir à l'accueil ANNULER`)){
-                window.location.href="Cart.html";
+            if(window.confirm(`${teddy.name} has been added to cart
+            View basket OK ou return to home ANNULER`)){
+                window.location.href="cart.html";
             }
             else{
                 window.location.href="index.html";
