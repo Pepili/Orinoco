@@ -1,122 +1,122 @@
 /*header*/
 
-header{
-    background-color: $color-primary;
-    display:flex;    
+header {
+  background-color: $color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  h1 {
+    margin: 0;
+    font-family: 'fingerpaint';
+  }
+  a {
+    color: black;
+  }
+  .link {
+    display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding:10px 20px;
-    h1{
-        margin:0;
-        font-family:'fingerpaint';        
-    } 
-    a{
-        color:black;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    .mainMenu {
+      display: flex;
+      li {
+        padding: 0 20px;
+        a {
+          color: black;
+          font-size: 16px;
+          display: inline-block;
+          position: relative;
+          padding-bottom: 10px;
+          width: 100%;
+          &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 500ms ease-in-out;
+            background-color: darken($color-primary, 20%);
+          }
+          &:hover:before {
+            opacity: 1;
+          }
+          &:after {
+            background: none repeat scroll 0 0 transparent;
+            bottom: 0;
+            content: '';
+            display: block;
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            background: black;
+            transition: width 0.3s ease 0s, left 0.3s ease 0s;
+            width: 0;
+          }
+          &:hover:after {
+            width: 100%;
+            left: 0;
+          }
+        }
+      }
     }
-    .link{
-        display:flex;
-        align-items: center;
-    }   
-    nav{   
-        display:flex;     
-        flex-wrap: wrap;
-        .mainMenu{
-            display: flex;
-            li{
-                padding:0 20px;
-                a{
-                    color:black;
-                    font-size:16px;
-                    display:inline-block;
-                    position:relative;
-                    padding-bottom: 10px;
-                    width:100%;
-                    &:before{
-                        content: "";
-                        position:absolute;
-                        top:0;
-                        bottom:0;
-                        left:0; 
-                        right:0;           
-                        opacity:0;
-                        z-index:-1;
-                        transition:opacity 500ms ease-in-out;
-                        background-color: darken($color-primary, 20%);
-                    }
-                    &:hover:before{
-                        opacity:1;
-                    }
-                    &:after{
-                        background: none repeat scroll 0 0 transparent;
-                        bottom: 0;
-                        content: "";
-                        display: block;
-                        height: 2px;
-                        left: 50%;
-                        position: absolute;
-                        background: black;
-                        transition: width 0.3s ease 0s, left 0.3s ease 0s;
-                        width: 0;
-                    }
-                    &:hover:after{
-                        width: 100%; 
-                        left: 0; 
-                    }
-                }    
-            }                  
-        }
-        .barMenu{
-            font-size: 22px;
-            color:black;
-            background-color:transparent;
-            border:0;
-            cursor:pointer;            
-            line-height: 57px;
-            margin:10px;
-            display:none;
-            &:focus{
-                outline:none;
-            }
-        }
-    } 
-    .link__icons{
-        display:flex;        
-        i{
-            padding: 0 10px;           
-            font-size: 20px;        
-            cursor:pointer;         
-        }
-    }   
+    .barMenu {
+      font-size: 22px;
+      color: black;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      line-height: 57px;
+      margin: 10px;
+      display: none;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .link__icons {
+    display: flex;
+    i {
+      padding: 0 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
 }
 
-@media all and(max-width:840px){
-    .link{
-        flex-direction: row-reverse;
-    }
-    .mainMenu{
-        display:none !important;
-        width: 100%;
-        li{
-            padding:0 !important;
-            text-align: center;            
-            a{
-                &:after{
-                    display: none !important;
-                }
-            }
+@media all and(max-width:840px) {
+  .link {
+    flex-direction: row-reverse;
+  }
+  .mainMenu {
+    display: none !important;
+    width: 100%;
+    li {
+      padding: 0 !important;
+      text-align: center;
+      a {
+        &:after {
+          display: none !important;
         }
-        &.show{
-            display:flex !important;  
-            flex-direction: column;
-            position:absolute;
-            background-color: $color-primary; 
-            top: 80px;
-            right: 0;
-            line-height:108px;
-            z-index:2;         
-        }
+      }
     }
-    .barMenu{
-        display:block !important;        
+    &.show {
+      display: flex !important;
+      flex-direction: column;
+      position: absolute;
+      background-color: $color-primary;
+      top: 80px;
+      right: 0;
+      line-height: 108px;
+      z-index: 2;
     }
+  }
+  .barMenu {
+    display: block !important;
+  }
 }

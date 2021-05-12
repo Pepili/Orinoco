@@ -20,12 +20,10 @@ function response(teddy) {
           </div>
           <h2>Description:</h2><p class="pDescription">${teddy.description}</p>
           <div class="infoProductTeddy">
-            <nav>
-              <button id="buttonColor">
-                Select a color 
-                <span id="down" class="fas fa-chevron-down"></span>
-              </button>
-              <ul id="navColors"></ul>
+            <nav id="colorSelect">              
+              <select id="navColors" required>
+                <option value=""disabled selected='selected'>Choose a color</option>
+              </select>
             </nav> 
             <div class="colorChoice">
               <label for="q">Quantity:</label>
@@ -51,28 +49,17 @@ function response(teddy) {
 `;
   const { colors } = teddy;
   const navColors = document.getElementById('navColors');
-  const buttonColor = document.getElementById('buttonColor');
-  const down = document.getElementById('down');
 
   function colorFunction(item) {
-    navColors.innerHTML += `<li>${item}</li>`;
+    navColors.innerHTML += `<option value="${item}">${item}</option>`;
   }
   colors.forEach(colorFunction);
-
-  buttonColor.addEventListener('click', () => {
-    const downClass = down.className;
-    navColors.classList.toggle('showColor');
-    if (downClass === 'fas fa-chevron-down') {
-      down.className = 'fas fa-chevron-up';
-    } else {
-      down.className = 'fas fa-chevron-down';
-    }
-  });
 
   /* ajout des produits dans le panier */
 
   // selection de l'id du formulaire
   const qt = document.getElementById('qt');
+  // + navColors pour le choix des couleurs, déjà défini plus haut
 
   // Selection du bouton ajouter l'article au panier
   const addCart = document.getElementById('addCart');
@@ -82,7 +69,13 @@ function response(teddy) {
     event.preventDefault();
 
     // mettre le choix de l'utilisateur dans une variable
-    const choiceQt = qt.value;
+    const choiceQt = Number(qt.value);
+    const choiceColor = navColors.value;
+    console.log(choiceColor);
+    if (!choiceColor) {
+      alert('Thanks to add a color');
+      return;
+    }
 
     // récupération des valeurs du formulaire
     const valueProduct = {
@@ -90,6 +83,7 @@ function response(teddy) {
       name: teddy.name,
       // eslint-disable-next-line
       id: teddy._id,
+      color: choiceColor,
       price: parseFloat(teddy.price / 100).toFixed(2),
       description: teddy.description,
       quantity: choiceQt,
@@ -103,6 +97,7 @@ function response(teddy) {
     // fonction fenêtre pop up
     const popup = () => {
       if (
+        // eslint-disable-next-line no-alert
         window.confirm(
           `${teddy.name} has been added to cart View basket OK ou return to home ANNULER`,
         )
@@ -115,8 +110,16 @@ function response(teddy) {
 
     // fonction addProductStorage
     const addProductStorage = () => {
+      const sameId = productAddLocalStorage.findIndex(
+        (v) => v.id === valueProduct.id && v.color === valueProduct.color,
+      );
+      if (sameId < 0) {
+        productAddLocalStorage.push(valueProduct);
+      } else {
+        productAddLocalStorage[sameId].quantity += choiceQt;
+        // permet d'explorer l'interieur d'une valeur
+      }
       // ajout dans l'array de l'objet avec les values choisi par l'utilisateur
-      productAddLocalStorage.push(valueProduct);
 
       // transformation en format JSON et l'envoyer dans la key product du localStorage
       localStorage.setItem('product', JSON.stringify(productAddLocalStorage));

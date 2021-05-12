@@ -470,10 +470,28 @@ footer .contact ul li a:hover:after {
   line-height: 28px;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+}
+.teddyProduct .coutureProduct .teddyDescriptionProduct .infoProductTeddy {
+  display: flex;
   justify-content: space-between;
+  height: 40px;
+  align-items: center;
+}
+.teddyProduct .coutureProduct .teddyDescriptionProduct .infoProductTeddy nav {
+  width: 40%;
+}
+.teddyProduct .coutureProduct .teddyDescriptionProduct .infoProductTeddy nav select {
+  font-size: 16px;
+  height: 30px;
+  width: 100%;
+  background-color: #F9F5E8;
+  cursor: pointer;
+}
+.teddyProduct .coutureProduct .teddyDescriptionProduct .infoProductTeddy nav select option {
+  font-size: 16px;
 }
 .teddyProduct .coutureProduct .teddyDescriptionProduct .infoProductTeddy .colorChoice {
-  float: right;
   font-size: 16px;
   line-height: 35px;
 }
@@ -498,57 +516,6 @@ footer .contact ul li a:hover:after {
 }
 .teddyProduct .coutureProduct .teddyDescriptionProduct .textTeddyDescription {
   display: flex;
-}
-.teddyProduct .coutureProduct .teddyDescriptionProduct nav {
-  position: absolute;
-  width: 25%;
-  margin: auto;
-  z-index: 2;
-  background-color: #F9F5E8;
-  border: 1px #31463f solid;
-  border-top: none;
-}
-.teddyProduct .coutureProduct .teddyDescriptionProduct #buttonColor {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  font-size: 16px;
-  color: #666666;
-  border: none;
-  background-color: #F9F5E8;
-  line-height: 35px;
-  cursor: pointer;
-}
-.teddyProduct .coutureProduct .teddyDescriptionProduct #buttonColor span {
-  line-height: 35px;
-}
-.teddyProduct .coutureProduct .teddyDescriptionProduct #buttonColor #up {
-  display: none;
-}
-.teddyProduct .coutureProduct .teddyDescriptionProduct #navColors {
-  display: none;
-}
-.teddyProduct .coutureProduct .teddyDescriptionProduct #navColors.showColor {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin: 0;
-  width: 100%;
-}
-.teddyProduct .coutureProduct .teddyDescriptionProduct #navColors.showColor li {
-  text-align: center;
-  font-size: 16px;
-  border-top: 1px #cccccc solid;
-  width: 100%;
-  margin: auto;
-  padding: 6px;
-  cursor: pointer;
-  z-index: 1;
-  transition: background-color 0.5s ease-in-out;
-}
-.teddyProduct .coutureProduct .teddyDescriptionProduct #navColors.showColor li:hover {
-  background-color: #e4d297;
 }
 .teddyProduct .coutureProduct .addCart {
   background-color: #d3896f;
@@ -593,7 +560,7 @@ footer .contact ul li a:hover:after {
 @media all and (max-width: 800px) {
   .coutureProduct {
     flex-direction: column;
-    height: 800px !important;
+    height: auto !important;
   }
   .coutureProduct .imageTeddy {
     width: 100% !important;
@@ -608,20 +575,25 @@ footer .contact ul li a:hover:after {
   .coutureProduct .teddyDescriptionProduct {
     width: 100%;
     height: 60%;
+    padding-bottom: 50px !important;
     justify-content: unset !important;
+  }
+  .coutureProduct .teddyDescriptionProduct .infoProductTeddy {
+    margin-top: 35px;
   }
   .coutureProduct nav {
     width: 40% !important;
   }
   .coutureProduct .buttonCart {
     width: 100%;
+    height: 180px;
     display: flex;
     justify-content: center;
+    align-items: flex-end;
   }
   .coutureProduct .addCart {
     width: 95% !important;
     margin-right: 0 !important;
-    margin-top: 50px;
     float: inherit !important;
   }
 }
@@ -629,17 +601,19 @@ footer .contact ul li a:hover:after {
 .containProduct {
   width: 95%;
   margin: 80px auto;
-  border-bottom: 1px #548BA1 solid;
   padding-bottom: 60px;
 }
 .containProduct h2 {
-  font-size: 30px;
+  font-size: 25px;
   padding-bottom: 20px;
-  border-bottom: 1px #548BA1 solid;
+  border-bottom: 2px #548BA1 solid;
 }
 .containProduct .containRecap {
   margin: 55px auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .containProduct .containRecap .containEmptyCart {
   text-align: center;
@@ -681,8 +655,203 @@ footer .contact ul li a:hover:after {
   background-color: #d3896f;
 }
 .containProduct .containRecap .infoProduct {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 60px;
+  padding: 20px;
+  border-bottom: 1px #548BA1 solid;
+}
+.containProduct .containRecap .infoProduct img {
+  width: auto;
+  height: 60px;
+}
+.containProduct .containRecap .infoProduct .elementProduct {
   display: flex;
+  width: 90%;
+  margin: auto;
+}
+.containProduct .containRecap .infoProduct .elementProduct h3 {
+  margin: 0;
+  line-height: 50px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+.containProduct .containRecap .infoProduct .elementProduct p {
+  margin: 0;
+  line-height: 54px;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.containProduct .containRecap .infoProduct .buttonSuppArticle {
+  width: 100%;
+  margin: auto;
+}
+.containProduct .containRecap .infoProduct .buttonSuppArticle .suppArticle {
+  height: 30px;
+  width: auto;
+  float: right;
+  background-color: #F9F5E8;
+  border: 1px black solid;
+  font-size: 13px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.containProduct .containRecap .infoProduct .buttonSuppArticle .suppArticle:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 500ms ease-in-out;
+  background-color: #CDDCD7;
+  border-radius: 10px;
+}
+.containProduct .containRecap .infoProduct .buttonSuppArticle .suppArticle:hover:before {
+  opacity: 1;
+}
+
+.containTotal {
+  border-top: 2px #548BA1 solid;
+  margin-top: 80px;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
+}
+.containTotal .buttonCart {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+.containTotal .buttonCart a {
+  color: black;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 8px;
+}
+.containTotal .buttonCart a:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: black;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+.containTotal .buttonCart a:hover:after {
+  width: 100%;
+  left: 0;
+}
+.containTotal .buttonCart a i {
+  margin-right: 10px;
+}
+.containTotal .buttonCart button {
+  background-color: #F9F5E8;
+  border: 1px black solid;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  margin-top: 10px;
+}
+.containTotal .buttonCart button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 500ms ease-in-out;
+  background-color: #CDDCD7;
+  border-radius: 10px;
+}
+.containTotal .buttonCart button:hover:before {
+  opacity: 1;
+}
+.containTotal .total p {
+  margin-top: 0;
+}
+.containTotal .total button {
+  background-color: #F9F5E8;
+  border: 2px #d3896f solid;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+.containTotal .total button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 500ms ease-in-out;
+  background-color: #d3896f;
+  border-radius: 6px;
+}
+.containTotal .total button:hover:before {
+  opacity: 1;
+}
+
+.containForm {
+  margin-top: 80px;
+}
+.containForm h3 {
+  font-size: 16px;
+}
+.containForm form {
+  display: flex;
+  flex-direction: column;
+}
+.containForm form .input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 20%;
+}
+.containForm form .input label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.containForm form .input input {
+  border: 1px #d3896f solid;
+}
+.containForm form #buttonForm {
+  width: 30%;
+  margin: auto;
+  margin-top: 30px;
+  height: 40px;
+  font-size: 16px;
+  background-color: #F9F5E8;
+  border: 2px #d3896f solid;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: background-color 500ms ease-in-out;
+}
+.containForm form #buttonForm:hover {
+  background-color: #d3896f;
 }
 
 /*# sourceMappingURL=style.css.map */

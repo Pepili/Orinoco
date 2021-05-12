@@ -1,7 +1,3 @@
-window.onload = function () {
-  // j'execute request au chargement de la page
-};
-
 // déclaration de la variable dans laquelle on met les key et values qui sont dans le local
 const productAddLocalStorage = JSON.parse(localStorage.getItem('product'));
 
@@ -9,7 +5,7 @@ const productAddLocalStorage = JSON.parse(localStorage.getItem('product'));
 const containRecap = document.getElementById('containRecap');
 
 // si le panier est vide : afficher "le panier est vide"
-if (productAddLocalStorage === null) {
+if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
   const emptyCart = `
     <div class="containEmptyCart">
         <p>There are no items in your shopping cart.</p>
@@ -38,7 +34,9 @@ if (productAddLocalStorage === null) {
         <h3>Price:</h3>
         <p>${parseFloat(product.price * product.quantity).toFixed(2)}€</p>
       </div>
-      <div class="buttonSuppArticle"><button class="suppArticle" >Remove</button></div>
+      <div class="buttonSuppArticle">
+        <button class="suppArticle" id="${product.id}">Remove</button>
+      </div>
   `;
     containRecap.appendChild(infoProduct);
   });
@@ -55,20 +53,21 @@ if (productAddLocalStorage === null) {
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
   const totalPriceCalcul = totalPrice.reduce(reducer);
   const containTotal = document.getElementById('containTotal');
+  /* ---------------------------------------------------- */
 
   const total = document.createElement('div');
   total.className = 'total';
   total.innerHTML = /* html */ `
     <p>Total = ${parseFloat(totalPriceCalcul).toFixed(2)} €</p>
-    <button>Clear the basket</button>
+    <button id="validateBasket">Validate my basket</button>
   `;
   containTotal.appendChild(total);
 
   const buttonCart = document.createElement('div');
   buttonCart.className = 'buttonCart';
   buttonCart.innerHTML = /* html */ `
-    <a href="index.html"><i class="fas fa-arrow-left"></i>Continue shopping</a>
-    <button>Validate my basket</button>
+    <a href="index.html"><i class="fas fa-arrow-left"></i>Continue shopping</a>    
+    <button id="clearBasket">Clear the basket</button>
   `;
   containTotal.appendChild(buttonCart);
 
@@ -76,12 +75,52 @@ if (productAddLocalStorage === null) {
   const suppArticle = document.getElementsByClassName('suppArticle');
 
   for (let j = 0; j < suppArticle.length; j += 1) {
-    suppArticle[j].addEventListener('click', (event) => {
-      event.preventDefault();
-      const idLocal = productAddLocalStorage[j].id;
-      idLocal.remove();
+    suppArticle[j].addEventListener('click', () => {
+      const checkId = suppArticle[j].getAttribute('id');
+      const checkIdCondition = (product) => product.id === checkId;
+      const index = productAddLocalStorage.findIndex(checkIdCondition);
+      productAddLocalStorage.splice(index, 1);
+      window.location.reload();
+      localStorage.setItem('product', JSON.stringify(productAddLocalStorage));
     });
   }
 
-  // vider le panier
+  // Bouton vider Panier
+  const clearBasket = document.getElementById('clearBasket');
+  clearBasket.addEventListener('click', () => {
+    localStorage.removeItem('product');
+    window.location.reload();
+  });
+
+  // bouton valider Panier
+  const form = document.getElementById('form');
+  const validateBasket = document.getElementById('validateBasket');
+  validateBasket.addEventListener('click', () => {
+    form.innerHTML = /* html */ `
+    <h3>Fill out the form to validate your basket</h3>
+    <form method="post" action="php">
+      <div class="input">
+        <label for="firstName">FirstName:</label>
+        <input type="text" name="firstName" id="firstName" required/>
+      </div>
+      <div class="input">
+        <label for="lastName">LastName:</label>
+        <input type="text" name="laststName" id="lastName" required/>
+      </div>
+      <div class="input">
+        <label for="adress">Adress:</label>
+        <input type="text" name="adress" id="adress" required/>
+      </div>
+      <div class="input">
+        <label for="city">City:</label>
+        <input type="text" name="city" id="city" required/>
+      </div>
+      <div class="input">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required/>
+      </div>
+      <input type="submit" value="Validate my basket" id="buttonForm"/>
+    </form>
+  `;
+  });
 }
