@@ -661,7 +661,11 @@ footer .contact ul li a:hover:after {
   padding: 20px;
   border-bottom: 1px #548BA1 solid;
 }
-.containProduct .containRecap .infoProduct img {
+.containProduct .containRecap .infoProduct a {
+  width: auto;
+  height: 60px;
+}
+.containProduct .containRecap .infoProduct a img {
   width: auto;
   height: 60px;
 }
@@ -672,7 +676,7 @@ footer .contact ul li a:hover:after {
 }
 .containProduct .containRecap .infoProduct .elementProduct h3 {
   margin: 0;
-  line-height: 50px;
+  line-height: 54px;
   font-size: 14px;
   margin-right: 10px;
 }
@@ -836,6 +840,7 @@ footer .contact ul li a:hover:after {
 }
 .containForm form .input input {
   border: 1px #d3896f solid;
+  height: 25px;
 }
 .containForm form #buttonForm {
   width: 30%;
@@ -852,6 +857,33 @@ footer .contact ul li a:hover:after {
 }
 .containForm form #buttonForm:hover {
   background-color: #d3896f;
+}
+
+@media all and (max-width: 800px) {
+  .infoProduct {
+    display: flex !important;
+    flex-direction: column;
+  }
+  .infoProduct a {
+    height: auto !important;
+    margin-bottom: 20px;
+  }
+  .infoProduct a img {
+    height: auto !important;
+    width: 100% !important;
+  }
+  .infoProduct .elementProduct {
+    height: 30px;
+    width: 100% !important;
+  }
+  .infoProduct .elementProduct h3 {
+    line-height: 30px !important;
+    font-size: 16px !important;
+  }
+  .infoProduct .elementProduct p {
+    line-height: 30px !important;
+    font-size: 16px !important;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

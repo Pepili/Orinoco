@@ -5,6 +5,7 @@ function request(url, cb) {
     .then((json) => cb(json));
 }
 
+/* ---- j'integre l'html à la div coutureParent --- */
 function response(teddy) {
   const divTeddies = document.getElementById('coutureParent');
   divTeddies.innerHTML = /* html */ ` 
@@ -47,9 +48,10 @@ function response(teddy) {
       </div>        
   </div>    
 `;
+
   const { colors } = teddy;
   const navColors = document.getElementById('navColors');
-
+  /* --- j'integre au select navColors les différentes option de l'API --- */
   function colorFunction(item) {
     navColors.innerHTML += `<option value="${item}">${item}</option>`;
   }
@@ -71,7 +73,7 @@ function response(teddy) {
     // mettre le choix de l'utilisateur dans une variable
     const choiceQt = Number(qt.value);
     const choiceColor = navColors.value;
-    console.log(choiceColor);
+    // retourner une alerte si aucune couleur n'est selectionnée
     if (!choiceColor) {
       alert('Thanks to add a color');
       return;
@@ -91,7 +93,7 @@ function response(teddy) {
 
     /* stocker la récupération des valeurs du formulaire dans le local storage */
 
-    // déclaration de la variable dans laquelle on met les key et values qui sont dans le local
+    // déclaration de la variable qui créer la key product
     let productAddLocalStorage = JSON.parse(localStorage.getItem('product'));
 
     // fonction fenêtre pop up
@@ -110,17 +112,18 @@ function response(teddy) {
 
     // fonction addProductStorage
     const addProductStorage = () => {
+      // verification que le produit n'est pas deja dans le local storage
       const sameId = productAddLocalStorage.findIndex(
+        // l'id et la couleur sont les memes que celle dans le localstorage
         (v) => v.id === valueProduct.id && v.color === valueProduct.color,
       );
+      // si l'id et la couleur sont différents, on met l'article dans le local
       if (sameId < 0) {
         productAddLocalStorage.push(valueProduct);
       } else {
+        // sinon on incrémente que la quantité dans le produit deja existant
         productAddLocalStorage[sameId].quantity += choiceQt;
-        // permet d'explorer l'interieur d'une valeur
       }
-      // ajout dans l'array de l'objet avec les values choisi par l'utilisateur
-
       // transformation en format JSON et l'envoyer dans la key product du localStorage
       localStorage.setItem('product', JSON.stringify(productAddLocalStorage));
     };
@@ -145,6 +148,7 @@ window.onload = () => {
   request(`http://localhost:3000/api/teddies/${id}`, response);
 };
 
+/* --- on affiche la liste ul au click sur l'icone --- */
 const barMenu = document.getElementById('barMenu');
 const mainMenu = document.getElementById('mainMenu');
 

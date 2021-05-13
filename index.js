@@ -35,6 +35,7 @@ window.onload = () => {
   request('http://localhost:3000/api/teddies', response);
 };
 
+/* --- on affiche la liste ul au click sur l'icone --- */
 const barMenu = document.getElementById('barMenu');
 const mainMenu = document.getElementById('mainMenu');
 

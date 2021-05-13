@@ -51,9 +51,13 @@
       grid-auto-rows: 60px;
       padding: 20px;
       border-bottom: 1px $color-couture solid;
-      img {
+      a {
         width: auto;
         height: 60px;
+        img {
+          width: auto;
+          height: 60px;
+        }
       }
       .elementProduct {
         display: flex;
@@ -61,7 +65,7 @@
         margin: auto;
         h3 {
           margin: 0;
-          line-height: 50px;
+          line-height: 54px;
           font-size: 14px;
           margin-right: 10px;
         }
@@ -228,6 +232,7 @@
       }
       input {
         border: 1px darken($color-tertiary, 20%) solid;
+        height: 25px;
       }
     }
     #buttonForm {
@@ -244,6 +249,33 @@
       transition: background-color 500ms ease-in-out;
       &:hover {
         background-color: darken($color-tertiary, 20%);
+      }
+    }
+  }
+}
+
+@media all and(max-width:800px) {
+  .infoProduct {
+    display: flex !important;
+    flex-direction: column;
+    a {
+      height: auto !important;
+      margin-bottom: 20px;
+      img {
+        height: auto !important;
+        width: 100% !important;
+      }
+    }
+    .elementProduct {
+      height: 30px;
+      width: 100% !important;
+      h3 {
+        line-height: 30px !important;
+        font-size: 16px !important;
+      }
+      p {
+        line-height: 30px !important;
+        font-size: 16px !important;
       }
     }
   }

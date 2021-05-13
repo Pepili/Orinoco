@@ -1,10 +1,16 @@
-// déclaration de la variable dans laquelle on met les key et values qui sont dans le local
+/* ---------- déclaration de la variable dans laquelle on met
+ les key et values qui sont dans le local ------- */
+
+// json.parse permet de convertir une chaine de texte en objet JS
 const productAddLocalStorage = JSON.parse(localStorage.getItem('product'));
 
-// sélection de la classe où je vais injecter le code
+/* ----- sélection de la balise avec son id où je vais injecter le code---- */
 const containRecap = document.getElementById('containRecap');
 
-// si le panier est vide : afficher "le panier est vide"
+/* ---- si le panier est vide : afficher ce message ---- */
+// mettre un ! devant un élément permet d'indiquer son message d'erreur
+// || veut dire ou
+// .length indique le nombre d'élément dans un tableau
 if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
   const emptyCart = `
     <div class="containEmptyCart">
@@ -14,14 +20,20 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
         <a href="index.html">Continue shopping</a>
     </div>
   `;
+  // innerHTML permet d'injecter du code dans une balise selectionnée
   containRecap.innerHTML = emptyCart;
+
+  /* --- si le panier n'est pas vide: on affiche les produits contenus dans le localStorage --- */
 } else {
-  // si le panier n'est pas vide: on affiche les produits contenus dans le localStorage
+  // forEach permet d'executer une fonction sur chaque élément du tableau productAddLocalStorage
+  // product est le paramètre de la fonction auquel on va assigner les valeurs des éléments du local
   productAddLocalStorage.forEach((product) => {
     const infoProduct = document.createElement('div');
     infoProduct.className = 'infoProduct';
     infoProduct.innerHTML = /* html */ `
-      <img class="imageTeddy" src="${product.imageUrl}" alt="teddy"/>
+      <a href="product.html?_id=${product.id}">
+        <img class="imageTeddy" src="${product.imageUrl}" alt="teddy"/>
+      </a>
       <div class="elementProduct">
         <h3>Name:</h3>
         <p>${product.name}</p>
@@ -41,28 +53,39 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
     containRecap.appendChild(infoProduct);
   });
 
-  // Total du panier
+  /* --- Total du panier --- */
+  // on créé un tableau appelé totalPrice vide
   const totalPrice = [];
-  const localLength = productAddLocalStorage.length;
-  for (let i = 0; i < localLength; i += 1) {
-    const localPrice = productAddLocalStorage[i].price;
-    const localQuantity = productAddLocalStorage[i].quantity;
-    const cartPrice = localPrice * localQuantity;
+  // on indique dans localLength le nombre d'élément présent dans le tableau productAddLocalStorage
+  productAddLocalStorage.forEach((total) => {
+    const cartPrice = total.price * total.quantity;
+    // on ajoute au tableau totalPrice le prix total d'un produit
     totalPrice.push(cartPrice);
-  }
+  });
+  // l'argument accumulator correspond à la valeur précedemment retournér par le dernier callback
+  // l'argument currentValue correspond à la valeur actuellement manipulé dans le tableau totalPrice
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  /* la méthode reduce() permet de réduire à une seule valeur
+  le tableau totalPrice en traitant chaque valeur de celui-ci à savoir cartPrice */
   const totalPriceCalcul = totalPrice.reduce(reducer);
   const containTotal = document.getElementById('containTotal');
   /* ---------------------------------------------------- */
 
+  /* ---- On intègre le total et le bouton valider mon panier --- */
+  // on créé une div avec pour classe total
   const total = document.createElement('div');
   total.className = 'total';
+  // on y intègre une balise p et a
+  // la fonction parseFloat() permet de transformer une chaîne de caractère en nombre
+  // toFixed permet de forçer l'affichage de nombre après la virgule, ici 2 chiffres
   total.innerHTML = /* html */ `
     <p>Total = ${parseFloat(totalPriceCalcul).toFixed(2)} €</p>
-    <button id="validateBasket">Validate my basket</button>
+    <a href="#formTitle"><button id="validateBasket">Validate my basket</button></a>
   `;
+  // on intègre cette nouvelle div appelé total dans containTotal
   containTotal.appendChild(total);
 
+  /* --- on intègre le bouton continuer le shopping et supprimer le panier --- */
   const buttonCart = document.createElement('div');
   buttonCart.className = 'buttonCart';
   buttonCart.innerHTML = /* html */ `
@@ -71,33 +94,49 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
   `;
   containTotal.appendChild(buttonCart);
 
-  // Bouton supprimer article du panier
+  /* ---  Bouton supprimer article du panier --- */
+  // on récupère sous forme de tableau (grâce à className) les boutons suppArticle
   const suppArticle = document.getElementsByClassName('suppArticle');
 
+  // on utilise la boucle for pour appliquer l'evenement sur tout les boutons remove
+  // j représente l'index d'un produit
+  // j=0 représente le point de départ du code
+  /* j < suppArticle.length représente la condition
+  la boucle doit s'arréter quand on a fait tout le tableau */
+  // j +=1 signifie que l'on passe les valeurs une par une
   for (let j = 0; j < suppArticle.length; j += 1) {
+    // suppArticle[j] désigne le bouton remove concerné à l'event
     suppArticle[j].addEventListener('click', () => {
+      // getAttribute permet de renvoyer la valeur d'un attribut (ici l'id)
       const checkId = suppArticle[j].getAttribute('id');
+      // cette fonction permet de vérifier si l'id du bouton supp est le meme que le produit
       const checkIdCondition = (product) => product.id === checkId;
+      // cette ligne permet de chercher dans la key product l'index qui correspond à l'id
       const index = productAddLocalStorage.findIndex(checkIdCondition);
+      /* splice permet de retirer un élément du tableau product dans le localStorage
+      en fonction de son index */
       productAddLocalStorage.splice(index, 1);
       window.location.reload();
+      // setItem permet de mettre à jour le tableau product apres la modif
       localStorage.setItem('product', JSON.stringify(productAddLocalStorage));
     });
   }
 
-  // Bouton vider Panier
+  /* ------ Bouton vider Panier ----- */
   const clearBasket = document.getElementById('clearBasket');
   clearBasket.addEventListener('click', () => {
+    // removeItem supprime une clé du localStorage (product)
     localStorage.removeItem('product');
     window.location.reload();
   });
 
-  // bouton valider Panier
+  /* ---- bouton valider Panier ---- */
   const form = document.getElementById('form');
   const validateBasket = document.getElementById('validateBasket');
+  // on affiche le formulaire au click sur le bouton
   validateBasket.addEventListener('click', () => {
     form.innerHTML = /* html */ `
-    <h3>Fill out the form to validate your basket</h3>
+    <h3 id="formTitle">Fill out the form to validate your basket</h3>
     <form method="post" action="php">
       <div class="input">
         <label for="firstName">FirstName:</label>
@@ -124,3 +163,11 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
   `;
   });
 }
+
+/* --- on affiche la liste ul au click sur l'icone --- */
+const barMenu = document.getElementById('barMenu');
+const mainMenu = document.getElementById('mainMenu');
+
+barMenu.addEventListener('click', () => {
+  mainMenu.classList.toggle('show');
+});
