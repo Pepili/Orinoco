@@ -80,7 +80,6 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
   // toFixed permet de forçer l'affichage de nombre après la virgule, ici 2 chiffres
   total.innerHTML = /* html */ `
     <p>Total = ${parseFloat(totalPriceCalcul).toFixed(2)} €</p>
-    <a href="#formTitle"><button id="validateBasket">Validate my basket</button></a>
   `;
   // on intègre cette nouvelle div appelé total dans containTotal
   containTotal.appendChild(total);
@@ -132,23 +131,23 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
 
   /* ---- bouton valider Panier ---- */
   const form = document.getElementById('form');
-  const validateBasket = document.getElementById('validateBasket');
-  // on affiche le formulaire au click sur le bouton
-  validateBasket.addEventListener('click', () => {
-    form.innerHTML = /* html */ `
+  // on affiche le formulaire
+  form.innerHTML = /* html */ `
     <h3 id="formTitle">Fill out the form to validate your basket</h3>
-    <form method="post" action="php">
+    <form id="formList">
       <div class="input">
         <label for="firstName">FirstName:</label>
-        <input type="text" name="firstName" id="firstName" required/>
+        <input type="text" name="firstName" id="firstName" pattern= "[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?" required/>
+        <span id="missFirstName"></span>
       </div>
       <div class="input">
         <label for="lastName">LastName:</label>
-        <input type="text" name="laststName" id="lastName" required/>
+        <input type="text" name="laststName" id="lastName" pattern= "[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?" required/>
+        <span id="missLastName"></span>
       </div>
       <div class="input">
-        <label for="adress">Adress:</label>
-        <input type="text" name="adress" id="adress" required/>
+        <label for="address">Address:</label>
+        <input type="text" name="address" id="address" required/>
       </div>
       <div class="input">
         <label for="city">City:</label>
@@ -158,9 +157,36 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" required/>
       </div>
-      <input type="submit" value="Validate my basket" id="buttonForm"/>
+      <input type="submit" value ="Validate my basket" id="buttonForm">
     </form>
   `;
+
+  /* ------ ajout du formulaire dans le localstorage ------- */
+  const buttonForm = document.getElementById('buttonForm');
+  const firstName = document.getElementById('firstName');
+  const lastName = document.getElementById('lastName');
+  const address = document.getElementById('address');
+  const city = document.getElementById('city');
+  const email = document.getElementById('email');
+
+  const url = 'http://localhost:3000/api/teddies/order';
+  buttonForm.addEventListener('click', () => {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        products: localStorage.getItem('product'),
+        contact: {
+          firstName: firstName.value,
+          lastName: lastName.value,
+          address: address.value,
+          city: city.value,
+          email: email.value,
+        },
+      }),
+    }).then((res) => res.json());
   });
 }
 
