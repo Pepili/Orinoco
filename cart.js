@@ -160,7 +160,6 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
       <input type="submit" value ="Validate my basket" id="buttonForm">
     </form>
   `;
-
   /* ------ ajout du formulaire dans le localstorage ------- */
   const buttonForm = document.getElementById('buttonForm');
   const firstName = document.getElementById('firstName');
@@ -168,16 +167,21 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
   const address = document.getElementById('address');
   const city = document.getElementById('city');
   const email = document.getElementById('email');
+  const teddyId = [];
+  productAddLocalStorage.forEach((product) => {
+    teddyId.push(product.id);
+  });
 
   const url = 'http://localhost:3000/api/teddies/order';
-  buttonForm.addEventListener('click', () => {
+  buttonForm.addEventListener('click', (event) => {
+    event.preventDefault();
     fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        products: localStorage.getItem('product'),
+        products: teddyId,
         contact: {
           firstName: firstName.value,
           lastName: lastName.value,
@@ -186,7 +190,16 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
           email: email.value,
         },
       }),
-    }).then((res) => res.json());
+    }).then(async (response) => {
+      // récupération de l'id et du nom de l'utilisateur
+      const contenu = await response.json();
+      const name = contenu.contact;
+      localStorage.setItem('order', JSON.stringify(contenu.orderId));
+      localStorage.setItem('name', JSON.stringify(name.firstName));
+      localStorage.setItem('price', JSON.stringify(totalPriceCalcul));
+      // Aller vers la page Order
+      window.location = 'order.html';
+    });
   });
 }
 

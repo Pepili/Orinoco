@@ -1,0 +1,56 @@
+.confirm {
+  width: 100%;
+  .thank {
+    width: 80%;
+    margin: 80px auto;
+    text-align: center;
+    h1 {
+      font-family: 'fingerpaint';
+      font-size: 30px;
+    }
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+  .orderId {
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+    border: 1px darken($color-primary, 30%) solid;
+    background-color: lighten($color-primary, 10%);
+    h2 {
+      font-size: 18px;
+      margin: 0;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 18px;
+    }
+  }
+  .buttonReturn {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    .return {
+      width: 50%;
+      color: black;
+      text-align: center;
+      line-height: 60px;
+      margin: auto;
+      margin-top: 30px;
+      height: 60px;
+      font-size: 20px;
+      background-color: $color-secondary;
+      border: 2px darken($color-tertiary, 20%) solid;
+      cursor: pointer;
+      position: relative;
+      display: inline-block;
+      transition: background-color 500ms ease-in-out;
+      &:hover {
+        background-color: darken($color-tertiary, 20%);
+      }
+    }
+  }
+}

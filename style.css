@@ -885,5 +885,61 @@ footer .contact ul li a:hover:after {
     font-size: 16px !important;
   }
 }
+.confirm {
+  width: 100%;
+}
+.confirm .thank {
+  width: 80%;
+  margin: 80px auto;
+  text-align: center;
+}
+.confirm .thank h1 {
+  font-family: "fingerpaint";
+  font-size: 30px;
+}
+.confirm .thank p {
+  font-size: 20px;
+  font-weight: bold;
+}
+.confirm .orderId {
+  width: 80%;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+  border: 1px #739d8f solid;
+  background-color: #ebf1ef;
+}
+.confirm .orderId h2 {
+  font-size: 18px;
+  margin: 0;
+  margin-bottom: 8px;
+}
+.confirm .orderId p {
+  font-size: 18px;
+}
+.confirm .buttonReturn {
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+.confirm .buttonReturn .return {
+  width: 50%;
+  color: black;
+  text-align: center;
+  line-height: 60px;
+  margin: auto;
+  margin-top: 30px;
+  height: 60px;
+  font-size: 20px;
+  background-color: #F9F5E8;
+  border: 2px #d3896f solid;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: background-color 500ms ease-in-out;
+}
+.confirm .buttonReturn .return:hover {
+  background-color: #d3896f;
+}
 
 /*# sourceMappingURL=style.css.map */

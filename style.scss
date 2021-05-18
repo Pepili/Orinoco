@@ -1,15 +1,12 @@
-@import "utils/variables";
-@import "utils/mixins";
-@import "base/fonts";
-@import "base/page";
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'base/fonts';
+@import 'base/page';
 
-@import "layouts/header";
-@import "layouts/presentation";
-@import "layouts/articles";
-@import "layouts/footer";
-@import "layouts/product";
-@import "layouts/cart";
-
-
-
-
+@import 'layouts/header';
+@import 'layouts/presentation';
+@import 'layouts/articles';
+@import 'layouts/footer';
+@import 'layouts/product';
+@import 'layouts/cart';
+@import 'layouts/order';
