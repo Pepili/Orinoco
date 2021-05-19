@@ -7,7 +7,7 @@ const orderPrice = JSON.parse(localStorage.getItem('price'));
 const confirm = document.getElementById('confirm');
 confirm.innerHTML = /* html */ `
 <div class="thank" id="thank">
-  <h1>Order confirmed</h1>
+  <h2>Order confirmed</h2>
   <p>Thanks for your order ${orderName} !</p>
 </div>
 <div class="orderId" id="orderId">
