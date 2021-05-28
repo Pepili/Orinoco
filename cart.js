@@ -62,7 +62,7 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
     // on ajoute au tableau totalPrice le prix total d'un produit
     totalPrice.push(cartPrice);
   });
-  // l'argument accumulator correspond à la valeur précedemment retournér par le dernier callback
+  // l'argument accumulator correspond à la valeur précedemment retourné par le dernier callback
   // l'argument currentValue correspond à la valeur actuellement manipulé dans le tableau totalPrice
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
   /* la méthode reduce() permet de réduire à une seule valeur

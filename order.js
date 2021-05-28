@@ -1,11 +1,12 @@
-// récupération de l'orderId, du name et du prix total
-const orderId = JSON.parse(localStorage.getItem('order'));
-const orderName = JSON.parse(localStorage.getItem('name'));
-const orderPrice = JSON.parse(localStorage.getItem('price'));
+function order() {
+  // récupération de l'orderId, du name et du prix total
+  const orderId = JSON.parse(localStorage.getItem('order'));
+  const orderName = JSON.parse(localStorage.getItem('name'));
+  const orderPrice = JSON.parse(localStorage.getItem('price'));
 
-/* --- j'integre l'html à la section confirm --- */
-const confirm = document.getElementById('confirm');
-confirm.innerHTML = /* html */ `
+  /* --- j'integre l'html à la section confirm --- */
+  const confirm = document.getElementById('confirm');
+  confirm.innerHTML = /* html */ `
 <div class="thank" id="thank">
   <h2>Order confirmed</h2>
   <p>Thanks for your order ${orderName} !</p>
@@ -16,3 +17,5 @@ confirm.innerHTML = /* html */ `
 </div>
 <div class="buttonReturn"><a href="index.html" class="return">Return to home</a></div>
 `;
+}
+order();

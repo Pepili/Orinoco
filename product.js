@@ -49,7 +49,7 @@ function response(teddy) {
   </div>    
 `;
 
-  const { colors } = teddy;
+  const { colors } = teddy; // affectation de destructuration (permet  de décompresser teddy)
   const navColors = document.getElementById('navColors');
   /* --- j'integre au select navColors les différentes option de l'API --- */
   function colorFunction(item) {
@@ -143,8 +143,11 @@ function response(teddy) {
 
 window.onload = () => {
   // j'execute request au chargement de la page
+  /* URLSearchParams permet de manipuler la chaine de requete
+  (ici l'id présent dans l'url de la page) */
   const url = new URLSearchParams(window.location.search);
-  const id = url.get('_id');
+  const id = url.get('_id'); // on récuper l'id présent dans l'url de la page
+  // on affecte l'id récupéré dans l'url API
   request(`http://localhost:3000/api/teddies/${id}`, response);
 };
 
