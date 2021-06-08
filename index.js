@@ -1,8 +1,9 @@
-function request(url, cb) {
+function request(url, callback) {
   // j'execute request pour accéder à l'API des Teddies
   fetch(url)
     .then((res) => res.json())
-    .then((json) => cb(json));
+    .then((json) => callback(json))
+    .catch((error) => console.log(error));
 }
 
 function response(teddies) {

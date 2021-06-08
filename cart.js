@@ -129,52 +129,33 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
     window.location.reload();
   });
 
-  /* ---- bouton valider Panier ---- */
-  const form = document.getElementById('form');
-  // on affiche le formulaire
-  form.innerHTML = /* html */ `
-    <h3 id="formTitle">Fill out the form to validate your basket</h3>
-    <form id="formList">
-      <div class="input">
-        <label for="firstName">FirstName:</label>
-        <input type="text" name="firstName" id="firstName" pattern= "[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?" required/>
-        <span id="missFirstName"></span>
-      </div>
-      <div class="input">
-        <label for="lastName">LastName:</label>
-        <input type="text" name="laststName" id="lastName" pattern= "[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?" required/>
-        <span id="missLastName"></span>
-      </div>
-      <div class="input">
-        <label for="address">Address:</label>
-        <input type="text" name="address" id="address" required/>
-      </div>
-      <div class="input">
-        <label for="city">City:</label>
-        <input type="text" name="city" id="city" required/>
-      </div>
-      <div class="input">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required/>
-      </div>
-      <input type="submit" value ="Validate my basket" id="buttonForm">
-    </form>
-  `;
   /* ------ ajout du formulaire dans le localstorage ------- */
   const buttonForm = document.getElementById('buttonForm');
-  const firstName = document.getElementById('firstName');
-  const lastName = document.getElementById('lastName');
-  const address = document.getElementById('address');
-  const city = document.getElementById('city');
-  const email = document.getElementById('email');
   const teddyId = [];
   productAddLocalStorage.forEach((product) => {
     teddyId.push(product.id);
   });
+  const regex = /^[a-zA-ZàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ' -]{2,33}$/;
+  const regexEmail = /^[a-zA-Z0-9.!#$%&'*+\\\/=?^_`{|}~\-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-]{2,63}$/;
 
   const url = 'http://localhost:3000/api/teddies/order';
   buttonForm.addEventListener('click', (event) => {
     event.preventDefault();
+    event.stopPropagation();
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (
+      !regex.test(firstName) ||
+      !regex.test(lastName) ||
+      !regex.test(city) ||
+      !regexEmail.test(email)
+    ) {
+      alert('Please fill in the form fields correctly');
+      return;
+    }
     fetch(url, {
       method: 'POST',
       headers: {
@@ -183,23 +164,24 @@ if (!productAddLocalStorage || productAddLocalStorage.length === 0) {
       body: JSON.stringify({
         products: teddyId,
         contact: {
-          firstName: firstName.value,
-          lastName: lastName.value,
-          address: address.value,
-          city: city.value,
-          email: email.value,
+          firstName,
+          lastName,
+          address,
+          city,
+          email,
         },
       }),
-    }).then(async (response) => {
-      // récupération de l'id et du nom de l'utilisateur
-      const contenu = await response.json();
-      const name = contenu.contact;
-      localStorage.setItem('order', JSON.stringify(contenu.orderId));
-      localStorage.setItem('name', JSON.stringify(name.firstName));
-      localStorage.setItem('price', JSON.stringify(totalPriceCalcul));
-      // Aller vers la page Order
-      window.location = 'order.html';
-    });
+    })
+      .then(async (response) => {
+        // récupération de l'id et du nom de l'utilisateur
+        const contenu = await response.json();
+        localStorage.setItem('order', JSON.stringify(contenu.orderId));
+        localStorage.setItem('name', JSON.stringify(firstName));
+        localStorage.setItem('price', JSON.stringify(totalPriceCalcul));
+        // Aller vers la page Order
+        window.location = 'order.html';
+      })
+      .catch((error) => console.log(error));
   });
 }
 
